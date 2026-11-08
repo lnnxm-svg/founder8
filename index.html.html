@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder Growth Map — Add $100,000 a Month</title>
+<style>
+  :root{
+    --bg:#0b0b12;
+    --panel:#13131f;
+    --panel2:#181826;
+    --stroke:#262639;
+    --text:#f2f2f8;
+    --muted:#9a9ab0;
+    --yt:#ff4d4d;
+    --ig:#e75bcf;
+    --li:#4d9dff;
+    --ai:#ffa63d;
+    --ce:#38d98a;
+    --meta:#a86bff;
+    --gold:#ffd166;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+    background:radial-gradient(1200px 600px at 50% -10%, #1a1a2e 0%, var(--bg) 60%);
+    color:var(--text);
+    min-height:100vh;
+    padding:48px 20px 80px;
+  }
+  .wrap{max-width:1200px;margin:0 auto}
+
+  /* ---------- HEADER ---------- */
+  header{text-align:center;margin-bottom:56px}
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;letter-spacing:.35em;text-transform:uppercase;
+    color:var(--gold);
+    border:1px solid rgba(255,209,102,.35);
+    border-radius:999px;padding:8px 18px;margin-bottom:20px;
+  }
+  h1{font-size:clamp(34px,5vw,58px);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+  h1 span{
+    background:linear-gradient(90deg,var(--gold),#ff9f43,var(--yt));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sub{margin-top:14px;color:var(--muted);font-size:17px}
+
+  /* ---------- ZONE LABELS ---------- */
+  .zone-label{
+    display:flex;align-items:center;gap:14px;
+    margin:44px 0 24px;color:var(--muted);
+    font-size:12px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;
+  }
+  .zone-label::before,.zone-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--stroke),transparent)}
+
+  /* ---------- CHANNEL CARDS ---------- */
+  .channels{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:900px){.channels{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.channels{grid-template-columns:1fr}}
+  .card{
+    background:var(--panel);
+    border:1px solid var(--stroke);
+    border-radius:16px;
+    padding:20px;
+    position:relative;
+    overflow:hidden;
+    transition:transform .25s ease,border-color .25s ease;
+  }
+  .card:hover{transform:translateY(-4px)}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--c)}
+  .card:hover{border-color:var(--c)}
+  .channel-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .dot{width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+  .icon{font-size:22px;line-height:1}
+  .channel-name{font-weight:700;font-size:17px}
+  .tag{margin-left:auto;font-size:11px;color:var(--bg);background:var(--c);padding:3px 10px;border-radius:999px;font-weight:700;letter-spacing:.04em}
+  .item{margin-bottom:13px}
+  .item:last-child{margin-bottom:0}
+  .item b{display:block;font-size:14px;font-weight:600}
+  .item i{display:block;font-size:12.5px;color:var(--muted);font-style:normal;margin-top:2px}
+
+  /* ---------- CONNECTOR LINES ---------- */
+  .lines-block{margin:8px 0;display:block;width:100%;height:170px}
+
+  /* ---------- CONVERGENCE NODES ---------- */
+  .capture-nodes{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  @media(max-width:700px){.capture-nodes{grid-template-columns:1fr}}
+  .node{
+    background:linear-gradient(160deg,var(--panel2),var(--panel));
+    border:1px solid var(--stroke);
+    border-radius:20px;
+    padding:28px 24px;
+    text-align:center;
+    position:relative;
+  }
+  .node .emoji{font-size:34px;display:block;margin-bottom:10px}
+  .node h3{font-size:19px;font-weight:800;letter-spacing:.01em}
+  .node p{color:var(--muted);font-size:13.5px;margin-top:6px}
+  .node .pill{
+    display:inline-block;margin-top:14px;
+    font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+    color:#8f8fae;border:1px dashed var(--stroke);border-radius:999px;padding:5px 14px;
+  }
+
+  /* ---------- PIPELINE ---------- */
+  .pipeline-wrap{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:stretch}
+  @media(max-width:800px){.pipeline-wrap{grid-template-columns:1fr}}
+  .pipeline{display:flex;flex-direction:column;gap:0}
+  .stage{
+    background:#fff;color:#111;
+    border-radius:16px;
+    padding:22px 26px;
+    display:flex;align-items:center;gap:16px;
+    position:relative;
+    box-shadow:0 6px 24px rgba(0,0,0,.45);
+  }
+  .stage .num{
+    width:38px;height:38px;flex:none;border-radius:50%;
+    background:#111;color:#fff;font-weight:800;font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .stage b{font-size:18px;font-weight:800}
+  .stage span{display:block;color:#555;font-size:13px;margin-top:3px}
+  .arrow{
+    align-self:center;color:#555;font-size:20px;
+    padding:6px 0;text-align:center;
+    animation:bounceDown 1.6s infinite;
+  }
+  @keyframes bounceDown{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(6px);opacity:1}}
+
+  .terminus{
+    background:linear-gradient(140deg,#ffd166,#ffb347);
+    border-radius:16px;
+    padding:26px;
+    color:#1a1a00;
+    display:flex;align-items:center;gap:18px;
+    box-shadow:0 0 40px rgba(255,209,102,.25);
+  }
+  .terminus .emoji{font-size:38px}
+  .terminus small{display:block;font-weight:800;letter-spacing:.25em;font-size:11px;text-transform:uppercase;opacity:.75}
+  .terminus b{font-size:32px;font-weight:900;letter-spacing:-.02em}
+
+  /* ---------- BOTTOM GRID ---------- */
+  .bottom{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:52px}
+  @media(max-width:800px){.bottom{grid-template-columns:1fr}}
+  .legend,.gapbox{
+    background:var(--panel);
+    border-radius:16px;padding:26px;
+  }
+  .legend{border:1px solid var(--stroke)}
+  .gapbox{border:2px solid #fff}
+  .legend h4,.gapbox h4{
+    font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    font-weight:800;margin-bottom:18px;
+  }
+  .legend h4{color:var(--muted)}
+  .gapbox h4{color:#fff}
+  .legend-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px dashed #22223a;font-size:14px}
+  .legend-row:last-child{border:none}
+  .swatch{width:10px;height:10px;border-radius:3px;flex:none}
+  .legend-row em{font-style:normal;font-weight:700;min-width:110px;display:inline-block}
+  .legend-row span{color:var(--muted);font-size:13px}
+  .gapbox p{color:var(--muted);font-size:13.5px;margin-bottom:14px}
+  .check{display:flex;align-items:center;gap:10px;font-size:14.5px;padding:7px 0}
+  .check .tick{
+    width:20px;height:20px;flex:none;border-radius:50%;
+    background:#fff;color:#111;font-size:12px;font-weight:900;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  footer{margin-top:60px;text-align:center;color:#66667e;font-size:13px}
+  footer b{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Zone 0 · The Blueprint</div>
+    <h1>Founder <span>Growth Map</span></h1>
+    <p class="sub">Add <b>$100,000 a month.</b> One system. Six lanes. Zero gaps.</p>
+  </header>
+
+  <!-- ═══════════ ZONE 1 · REACH ═══════════ -->
+  <div class="zone-label">Zone 1 · Reach</div>
+
+  <div class="channels">
+    <div class="card" style="--c:var(--yt)">
+      <div class="channel-head"><span class="dot"></span><span class="icon">▶️</span><span class="channel-name">YouTube</span><span class="tag">ORGANIC</span></div>
+      <div class="item"><b>Long-form videos</b><i>1 deep dive a week</i></div>
+      <div class="item"><b>Shorts clips</b><i>AI-cut, posted daily</i></div>
+      <div class="item"><b>Lead magnet link</b><i>In every description</i></div>
+      <div class="item"><b>VSL page</b><i>Pre-sells every call</i></div>
+    </div>
+
+    <div class="card" style="--c:var(--ig)">
+      <div class="channel-head"><span class="dot"></span><span class="icon">📷</span><span class="channel-name">Instagram</span><span class="tag">SOCIAL</span></div>
+      <div class="item"><b>Reels from posts</b><i>Repurposed in minutes</i></div>
+      <div class="item"><b>Story CTAs</b><i>Warm followers daily</i></div>
+      <div class="item"><b>ManyChat DMs</b><i>Comment, get the link</i></div>
+    </div>
+
+    <div class="card" style="--c:var(--li)">
+      <div class="channel-head"><span class="dot"></span><span class="icon">💼</span><span class="channel-name">LinkedIn</span><span class="tag">AUTHORITY</span></div>
+      <div class="item"><b>Profile that sells</b><i>Turns visits into DMs</i></div>
+      <div class="item"><b>Hook bank</b><i>200+ proven hooks</i></div>
+      <div class="item"><b>Daily posts</b><i>Written with Claude</i></div>
+      <div class="item"><b>Lead-magnet posts</b><i>Comment to get it</i></div>
+      <div class="item"><b>DM follow-ups</b><i>The 1-1-3-7 system</i></div>
+    </div>
+
+    <div class="card" style="--c:var(--ai)">
+      <div class="channel-head"><span class="dot"></span><span class="icon">⚡</span><span class="channel-name">Claude agents</span><span class="tag">AI OPS</span></div>
+      <div class="item"><b>ICP research</b><i>Mines calls + reviews</i></div>
+      <div class="item"><b>Prospecting agent</b><i>Finds + scores leads</i></div>
+      <div class="item"><b>Enrichment agent</b><i>Buying signals, live</i></div>
+      <div class="item"><b>Outreach agent</b><i>Personal first lines</i></div>
+      <div class="item"><b>Follow-up agent</b><i>No lead goes cold</i></div>
+    </div>
+
+    <div class="card" style="--c:var(--ce)">
+      <div class="channel-head"><span class="dot"></span><span class="icon">✉️</span><span class="channel-name">Cold email</span><span class="tag">OUTBOUND</span></div>
+      <div class="item"><b>Clay lead lists</b><i>Only your exact ICP</i></div>
+      <div class="item"><b>Warmed inboxes</b><i>Land in primary</i></div>
+      <div class="item"><b>3-step sequence</b><i>Day 1, day 3, day 7</i></div>
+    </div>
+
+    <div class="card" style="--c:var(--meta)">
+      <div class="channel-head"><span class="dot"></span><span class="icon">♾️</span><span class="channel-name">Meta ads</span><span class="tag">PAID</span></div>
+      <div class="item"><b>Lead-magnet ads</b><i>Cold traffic in</i></div>
+      <div class="item"><b>Retarget viewers</b><i>Video + site visitors</i></div>
+      <div class="item"><b>Lead form ads</b><i>Pre-qualified answers</i></div>
+      <div class="item"><b>Book-a-call ads</b><i>Straight to calendar</i></div>
+    </div>
+  </div>
+
+  <!-- Animated connector lines: channels → capture nodes -->
+  <svg class="lines-block" viewBox="0 0 1200 170" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <style>
+        .flow{fill:none;stroke-width:2.5;stroke-linecap:round;
+              stroke-dasharray:10 7;animation:dash 1.4s linear infinite}
+        @keyframes dash{to{stroke-dashoffset:-34}}
+      </style>
+    </defs>
+    <path class="flow" stroke="#ff4d4d" d="M150,5 C150,95 400,80 420,165"/>
+    <path class="flow" stroke="#e75bcf" d="M350,5 C350,110 430,85 440,165"/>
+    <path class="flow" stroke="#4d9dff" d="M600,5 C600,70 460,85 460,165"/>
+    <path class="flow" stroke="#ffa63d" d="M850,5 C850,110 770,85 760,165"/>
+    <path class="flow" stroke="#38d98a" d="M1050,5 C1050,95 780,80 780,165"/>
+    <path class="flow" stroke="#a86bff" d="M600,5 C600,130 740,110 745,165"/>
+  </svg>
+
+  <!-- ═══════════ ZONE 2 · CAPTURE ═══════════ -->
+  <div class="zone-label">Zone 2 · Capture</div>
+
+  <div class="capture-nodes">
+    <div class="node">
+      <span class="emoji">🎪</span>
+      <h3>Lead Magnet Circus</h3>
+      <p>Every post points here. One irresistible asset pulls every lane into one place.</p>
+      <span class="pill">Every post points here</span>
+    </div>
+    <div class="node">
+      <span class="emoji">📨</span>
+      <h3>Inbox Junction</h3>
+      <p>Replies, DMs and forms land in one hub — nothing slips through.</p>
+      <span class="pill">Replies, DMs and forms</span>
+    </div>
+  </div>
+
+  <!-- Connector: capture → pipeline -->
+  <svg class="lines-block" style="height:110px" viewBox="0 0 1200 110" preserveAspectRatio="none" aria-hidden="true">
+    <path class="flow" stroke="#ffd166" d="M300,5 C300,60 250,50 240,105"/>
+    <path class="flow" stroke="#ffd166" d="M900,5 C900,60 950,50 960,105"/>
+  </svg>
+
+  <!-- ═══════════ ZONE 3 · CLOSE ═══════════ -->
+  <div class="zone-label">Zone 3 · Close</div>
+
+  <div class="pipeline-wrap">
+    <div class="pipeline">
+      <div class="stage">
+        <span class="num">1</span>
+        <div><b>🔍 Qualify</b><span>AI scores every lead — hot, warm or noise.</span></div>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="stage">
+        <span class="num">2</span>
+        <div><b>📅 Book</b><span>Calls auto-booked straight to your calendar.</span></div>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="stage">
+        <span class="num">3</span>
+        <div><b>🤝 Close</b><span>AI preps every deal — you just show up.</span></div>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="terminus">
+        <span class="emoji">🏦</span>
+        <div>
+          <small>Terminus · Bank</small>
+          <b>+$100K/mo</b>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ LEGEND & GAPS ═══════════ -->
+  <div class="bottom">
+    <div class="legend">
+      <h4>Key to Lines</h4>
+      <div class="legend-row"><span class="swatch" style="background:#ff4d4d"></span><em>YouTube</em><span>Long-form + Shorts</span></div>
+      <div class="legend-row"><span class="swatch" style="background:#e75bcf"></span><em>Instagram</em><span>Reels + ManyChat</span></div>
+      <div class="legend-row"><span class="swatch" style="background:#4d9dff"></span><em>LinkedIn</em><span>Posts + DMs</span></div>
+      <div class="legend-row"><span class="swatch" style="background:#ffa63d"></span><em>Claude agents</em><span>Claude Opus 5.5</span></div>
+      <div class="legend-row"><span class="swatch" style="background:#38d98a"></span><em>Cold email</em><span>Clay + Instantly</span></div>
+      <div class="legend-row"><span class="swatch" style="background:#a86bff"></span><em>Meta ads</em><span>Ads Manager + CAPI</span></div>
+    </div>
+
+    <div class="gapbox">
+      <h4>⚠️ Mind the Gap</h4>
+      <p>Automations close every gap:</p>
+      <div class="check"><span class="tick">✓</span>CRM sync on every reply</div>
+      <div class="check"><span class="tick">✓</span>Auto-booking + reminders</div>
+      <div class="check"><span class="tick">✓</span>No-show recovery</div>
+      <div class="check"><span class="tick">✓</span>Proposals in one click</div>
+    </div>
+  </div>
+
+  <footer>Built for <b>Nose</b> · Standout strategy blueprint · <b>Stand out without sounding like everyone else.</b></footer>
+</div>
+</body>
+</html>
